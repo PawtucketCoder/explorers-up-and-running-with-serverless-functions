@@ -28,7 +28,7 @@ export const handler = async () => {
             console.log(test);
         }
     });
-    db.end();
+//    db.end();
     
     return {
         statusCode: 200,
