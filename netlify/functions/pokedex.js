@@ -17,7 +17,7 @@ export const handler = async () => {
     function (err, results, fields) {
         if (err) {
             // problems
-            test = JSON.stringify({"test":"test"});
+            test = JSON.stringify(err);
         } else {
             test = JSON.stringify(results);
         }
