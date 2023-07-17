@@ -12,7 +12,7 @@ const db = mysql.createPool({
 
 var data;
 export const handler = async () => {
-    db.query('SELECT * FROM users WHERE username=?', ['test'],
+    db.query('SELECT * FROM users WHERE username=?', ['PawtucketC'],
     function (err, results, fields) {
         if (err) {
             data = JSON.stringify(err);

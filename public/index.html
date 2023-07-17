@@ -13,15 +13,24 @@
   <button id="fetch-btn">Fetch</button>
   <p id="response-output">Response Placeholder</p>
   <button id="fetch-pokedex-btn">Fetch Pokedex</button>
+  <button id="fetch2-btn">Bye</button>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const fetchBtn = document.getElementById('fetch-btn')
       const responseText = document.getElementById('response-output')
       const fetchPokedexBtn = document.getElementById('fetch-pokedex-btn')
+      const fetch2Btn = document.getElementById('fetch2-btn')
 
       fetchPokedexBtn.addEventListener('click', async () => {
         const response = await fetch('/.netlify/functions/pokedex')
+          .then(response => response.json())
+
+        responseText.innerText = JSON.stringify(response)
+      })
+
+      fetch2Btn.addEventListener('click', async () => {
+        const response = await fetch('/.netlify/functions/bye-world')
           .then(response => response.json())
 
         responseText.innerText = JSON.stringify(response)
