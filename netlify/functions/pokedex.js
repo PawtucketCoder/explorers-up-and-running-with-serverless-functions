@@ -27,6 +27,7 @@ export const handler = async () => {
             test = JSON.stringify(results);
             console.log(test);
         }
+        db.end();
     });
     
     return {
