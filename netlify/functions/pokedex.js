@@ -18,8 +18,10 @@ export const handler = async () => {
         if (err) {
             // problems
             test = JSON.stringify(err);
+            console.log(test);
         } else {
             test = JSON.stringify(results);
+            console.log(test);
         }
     });
     
