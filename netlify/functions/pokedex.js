@@ -8,30 +8,32 @@ const db = mysql.createPool({
     password: '345afe9b',
     database: 'heroku_ac29c9b918bb53a',
     port: 3306,
-    connectionLimit: 100,
-    queueLimit: 100,
     acquireTimeout: 1000000,
-    connectTimeout: 3000000,
-    debug: false
+    connectTimeout: 300000
   });
 
+var data;
+
 export const handler = async () => {
-    var test;
     db.query('SELECT * FROM users WHERE username=?', ['test'],
     function (err, results, fields) {
         if (err) {
-            // problems
-            test = JSON.stringify(err);
-            console.log(test);
+            data = JSON.stringify(err);
+            console.log(data);
         } else {
-            test = JSON.stringify(results);
-            console.log(test);
+            data = JSON.stringify(results);
+            console.log(data);
         }
     });
+
 //    db.end();
     
+    // return {
+    //     statusCode: 200,
+    //     body: test
+    // }
     return {
         statusCode: 200,
-        body: test
+        body: data
     }
 }
