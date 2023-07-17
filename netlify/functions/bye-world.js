@@ -8,21 +8,30 @@ const db = mysql.createPool({
     port: 3306,
     acquireTimeout: 1000000,
     connectTimeout: 300000
-  });
+});
 
-var data;
 export const handler = async () => {
-    db.query('SELECT * FROM users WHERE username=?', ['PawtucketC'],
-    function (err, results, fields) {
-        if (err) {
-            data = JSON.stringify(err);
-        } else {
-            data = JSON.stringify(results);
-        }
-    });
+    try {
+        const data = await new Promise((resolve, reject) => {
+            db.query('SELECT * FROM users WHERE username=?', ['PawtucketC'],
+                function (err, results, fields) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(results);
+                    }
+                }
+            );
+        });
 
-    return {
-        statusCode: 200,
-        body: data
+        return {
+            statusCode: 200,
+            body: JSON.stringify(data)
+        };
+    } catch (error) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify(error)
+        };
     }
-}
+};
