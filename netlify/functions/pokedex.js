@@ -8,6 +8,12 @@ const db = mysql.createPool({
     user: 'b9275475305c31',
     password: '345afe9b',
     database: 'heroku_ac29c9b918bb53a',
+    port: 3306,
+    connectionLimit: 100,
+    queueLimit: 100,
+    acquireTimeout: 1000000,
+    connectTimeout: 30000,
+    debug: false
   });
 
 var test;
