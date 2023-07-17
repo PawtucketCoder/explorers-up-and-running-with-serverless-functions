@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const app = express();
 const mysql = require('mysql');
 
 const db = mysql.createPool({
@@ -16,9 +15,8 @@ const db = mysql.createPool({
     debug: false
   });
 
-var test;
-
 export const handler = async () => {
+    var test;
     db.query('SELECT * FROM users WHERE username=?', ['test'],
     function (err, results, fields) {
         if (err) {
