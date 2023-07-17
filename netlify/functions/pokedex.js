@@ -13,25 +13,16 @@ const db = mysql.createPool({
   });
 
 var data;
-
 export const handler = async () => {
     db.query('SELECT * FROM users WHERE username=?', ['test'],
     function (err, results, fields) {
         if (err) {
             data = JSON.stringify(err);
-            console.log(data);
         } else {
             data = JSON.stringify(results);
-            console.log(data);
         }
     });
 
-//    db.end();
-    
-    // return {
-    //     statusCode: 200,
-    //     body: test
-    // }
     return {
         statusCode: 200,
         body: data
