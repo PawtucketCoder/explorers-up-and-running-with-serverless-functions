@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profiles</title>
+</head>
+
+<body>
+  <h1>Profiles</h1>
+  <input type="text" id="username-field" placeholder="Enter username" />
+  <button id="fetch-user-btn">Get User</button>
+  <p id="response-output">Response Placeholder</p>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const fetchUserBtn = document.getElementById('fetch-user-btn')
+      const responseText = document.getElementById('response-output')
+
+      fetchUserBtn.addEventListener('click', async () => {
+        const usernameField = document.getElementById('username-field')
+        const username = usernameField.value
+
+        const response = await fetch('/.netlify/functions/user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: username
+          })
+        }).then(response => response.json())
+
+        responseText.innerText = JSON.stringify(response)
+      })
+    })
+  </script>
+</body>
+
+</html>

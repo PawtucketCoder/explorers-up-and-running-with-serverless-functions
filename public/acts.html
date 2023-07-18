@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Profiles</title>
+  <title>Act Profiles</title>
   <style>
     table {
       border-collapse: collapse;
@@ -25,32 +25,32 @@
 </head>
 
 <body>
-  <h1>User Profiles</h1>
-  <input type="text" id="username-field" placeholder="Enter username" />
-  <button id="fetch-user-btn">Get User</button>
+  <h1>Act Profiles</h1>
+  <input type="text" id="name-field" placeholder="Enter name" />
+  <button id="fetch-act-btn">Get act</button>
   <div id="response-output"></div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const fetchUserBtn = document.getElementById('fetch-user-btn');
+      const fetchActBtn = document.getElementById('fetch-act-btn');
       const responseOutput = document.getElementById('response-output');
 
-      fetchUserBtn.addEventListener('click', async () => {
-        const usernameField = document.getElementById('username-field');
-        const username = usernameField.value;
+      fetchActBtn.addEventListener('click', async () => {
+        const nameField = document.getElementById('name-field');
+        const name = nameField.value;
 
-        const response = await fetch('/.netlify/functions/user', {
+        const response = await fetch('/.netlify/functions/act', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            username: username
+            name: name
           })
         }).then(response => response.json());
 
         const table = document.createElement('table');
-        const tableHeaders = ['ID', 'Username', 'Email', 'Created Date', 'Modified Date'];
+        const tableHeaders = ['ID', 'name'];
 
         // Create table header row
         const thead = document.createElement('thead');
@@ -65,10 +65,10 @@
 
         // Create table body rows
         const tbody = document.createElement('tbody');
-        response.forEach(user => {
-          const { id, username, email, created_date, modified_date } = user;
+        response.forEach(act => {
+          const { id, name } = act;
           const row = document.createElement('tr');
-          const values = [id, username, email, created_date, modified_date];
+          const values = [id, name];
           values.forEach(value => {
             const cell = document.createElement('td');
             cell.textContent = value;

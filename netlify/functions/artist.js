@@ -10,10 +10,12 @@ const db = mysql.createPool({
     connectTimeout: 300000
 });
 
-export const handler = async () => {
+export const handler = async (event) => {
     try {
+        const body = JSON.parse(event.body);
+        const name = body.name;
         const data = await new Promise((resolve, reject) => {
-            db.query('SELECT * FROM users WHERE username=?', ['PawtucketC'],
+            db.query('SELECT * FROM artists WHERE name=?', [name],
                 function (err, results, fields) {
                     if (err) {
                         reject(err);
