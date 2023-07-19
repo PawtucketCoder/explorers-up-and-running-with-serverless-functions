@@ -1,13 +1,16 @@
-const mysql = require('mysql');
+import dotenv from "dotenv";
+import mysql from 'mysql';
+
+dotenv.config();
 
 const db = mysql.createPool({
-    host: 'us-cdbr-east-06.cleardb.net',
-    user: 'b9275475305c31',
-    password: '345afe9b',
-    database: 'heroku_ac29c9b918bb53a',
-    port: 3306,
-    acquireTimeout: 1000000,
-    connectTimeout: 300000
+  host: process.env.API_DB_HOST,
+  user: process.env.API_DB_USER,
+  password: process.env.API_DB_PASSWORD,
+  database: process.env.API_DB_DATABASE,
+  port: 3306,
+  acquireTimeout: 1000000,
+  connectTimeout: 300000
 });
 
 export const handler = async (event) => {
